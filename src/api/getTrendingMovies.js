@@ -8,7 +8,7 @@ export const getTrendingMovies = async () => {
         page: 1,
       },
     });
-    return response.data;
+    return response.data.results;
   } catch (error) {
     Notiflix.Notify.failure(error.message);
   }
