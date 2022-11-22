@@ -2,7 +2,7 @@ import Notiflix from 'notiflix';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getMovieById } from 'api/getMovieById';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import {
   MovieInformation,
   MovieCard,
@@ -51,12 +51,13 @@ export const MovieDetails = () => {
         Additional information
         <ul>
           <li>
-            <Link>Cast</Link>
+            <Link to="cast">Cast</Link>
           </li>
           <li>
-            <Link>Review</Link>
+            <Link to="review">Review</Link>
           </li>
         </ul>
+        <Outlet />
       </AdditionalInfo>
     </main>
   );
