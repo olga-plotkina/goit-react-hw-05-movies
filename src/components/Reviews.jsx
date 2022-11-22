@@ -16,9 +16,15 @@ export const Reviews = () => {
   }, [movieId]);
   return (
     <ul>
-      {reviewInfo.map(review => (
-        <li>{review.author}</li>
-      ))}
+      {reviewInfo.length === 0 && (
+        <div>We don't have any reviews for this movie</div>
+      )}
+      {reviewInfo.length > 0 &&
+        reviewInfo.map(review => (
+          <li key={review.id}>
+            <h3>{review.author}</h3> {review.content}
+          </li>
+        ))}
     </ul>
   );
 };

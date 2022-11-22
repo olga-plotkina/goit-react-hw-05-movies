@@ -52,7 +52,7 @@ export const MovieDetails = () => {
         </MovieCard>
       </MovieInformation>
       <AdditionalInfo>
-        Additional information
+        <h3>Additional information</h3>
         <ul>
           <li>
             <Link to="cast">Cast</Link>

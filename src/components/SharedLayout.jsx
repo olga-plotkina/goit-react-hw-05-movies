@@ -1,5 +1,5 @@
-import { Outlet, Link } from 'react-router-dom';
-import { Container, Header } from './App.styled';
+import { Outlet } from 'react-router-dom';
+import { Container, Header, Link } from './App.styled';
 
 export const SharedLayout = () => {
   return (
