@@ -4,7 +4,7 @@ import Notiflix from 'notiflix';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-export const Home = () => {
+const Home = () => {
   const [arrayOfMovies, setArrayOfMovies] = useState([]);
 
   useEffect(() => {
@@ -25,3 +25,5 @@ export const Home = () => {
     </main>
   );
 };
+
+export default Home;

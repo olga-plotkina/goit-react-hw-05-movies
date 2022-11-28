@@ -1,6 +1,6 @@
 import Notiflix from 'notiflix';
 import { useLocation, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { getMovieById } from 'api/getMovieById';
 import { Link, Outlet } from 'react-router-dom';
 import {
@@ -10,7 +10,7 @@ import {
   BackButton,
 } from './MovieDetails.styled';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const [movieInfo, setMovieInfo] = useState([]);
   const [movieGenres, setMovieGenres] = useState('');
   const [poster, setPoster] = useState(
@@ -61,7 +61,11 @@ export const MovieDetails = () => {
           </li>
         </ul>
       </AdditionalInfo>
-      <Outlet />
+      <Suspense fallback={<div>Loading subpage...</div>}>
+        <Outlet />
+      </Suspense>
     </main>
   );
 };
+
+export default MovieDetails;
