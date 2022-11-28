@@ -13,7 +13,7 @@ export const SearchForm = ({ submitProp }) => {
     if (values.search.trim() === '') {
       return Notiflix.Notify.failure('Tape your search query plese');
     }
-    await submitProp(values);
+    await submitProp(values.search.toLowerCase());
   };
   return (
     <div>

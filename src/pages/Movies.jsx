@@ -1,33 +1,37 @@
 import { getMovieByQuery } from 'api/getMovieByQuery';
 import { SearchForm } from 'components/SearchForm';
 import { TrendingList } from 'components/TrendingList';
+import { useSearchParams } from 'react-router-dom';
 import Notiflix from 'notiflix';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
 export const Movies = () => {
   const [arrayOfMovies, setArrayOfMovies] = useState([]);
-  const [searchString, setSearchString] = useState('');
+  //   const [searchString, setSearchString] = useState('');
+  const [searchString, setSearchString] = useSearchParams();
+  const movieName = searchString.get('query') ?? '';
 
   useEffect(() => {
-    if (searchString === '') {
+    if (movieName === '') {
       return;
     }
     async function getMovies() {
       try {
-        const movies = await getMovieByQuery(searchString);
+        const movies = await getMovieByQuery(movieName);
         setArrayOfMovies(movies);
       } catch (error) {
         Notiflix.Notify.failure(error);
       }
     }
     getMovies();
-  }, [searchString]);
+  }, [movieName]);
   const handleSubmit = info => {
-    if (searchString === info.search.toLowerCase()) {
+    if (movieName === info) {
       return;
     }
-    setSearchString(info.search.toLowerCase());
+    const nextString = info !== '' ? { query: info } : {};
+    setSearchString(nextString);
     setArrayOfMovies([]);
   };
   return (
