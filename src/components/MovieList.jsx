@@ -18,9 +18,11 @@ export const Home = () => {
     }
     getMovies();
   }, []);
+
   return (
     <main>
       <h1>Trending today</h1>
+
       <TrendingList movies={arrayOfMovies}></TrendingList>
     </main>
   );

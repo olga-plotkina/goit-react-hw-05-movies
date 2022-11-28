@@ -1,5 +1,5 @@
 import { getMovieByQuery } from 'api/getMovieByQuery';
-import { SearchForm } from 'components/SearchForm';
+import { SearchForm } from 'components/SearchForm/SearchForm';
 import { TrendingList } from 'components/TrendingList';
 import { useSearchParams } from 'react-router-dom';
 import Notiflix from 'notiflix';
@@ -37,7 +37,12 @@ export const Movies = () => {
   return (
     <main>
       <SearchForm submitProp={handleSubmit}></SearchForm>
-      <TrendingList movies={arrayOfMovies}></TrendingList>
+      {arrayOfMovies.length > 0 && (
+        <TrendingList movies={arrayOfMovies}></TrendingList>
+      )}
+      {arrayOfMovies.length === 0 && searchString.length > 0 && (
+        <div>Nothing has found</div>
+      )}
     </main>
   );
 };

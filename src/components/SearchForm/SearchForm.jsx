@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import Notiflix from 'notiflix';
-import { Formik, ErrorMessage, Form, Field } from 'formik';
+import { Formik, ErrorMessage, Form } from 'formik';
+import { Input, Button } from './SearchForm.styled';
 
 const schema = Yup.object().shape({ search: Yup.string().required() });
 
@@ -11,9 +12,10 @@ const initialValues = {
 export const SearchForm = ({ submitProp }) => {
   const handleSubmit = async (values, actions) => {
     if (values.search.trim() === '') {
-      return Notiflix.Notify.failure('Tape your search query plese');
+      return Notiflix.Notify.failure('Tape your search query please');
     }
     await submitProp(values.search.toLowerCase());
+    actions.resetForm();
   };
   return (
     <div>
@@ -23,11 +25,11 @@ export const SearchForm = ({ submitProp }) => {
         validationSchema={schema}
       >
         <Form>
-          <button type="submit" aria-label="Search">
+          <Button type="submit" aria-label="Search">
             search
-          </button>
+          </Button>
 
-          <Field
+          <Input
             name="search"
             type="text"
             autoComplete="off"

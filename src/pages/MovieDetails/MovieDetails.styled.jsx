@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const MovieInformation = styled.div`
@@ -21,4 +22,15 @@ export const AdditionalInfo = styled.div`
   li {
     margin-bottom: 5px;
   }
+`;
+
+export const BackButton = styled(Link)`
+  display: inline-block;
+  padding: 2px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+  text-decoration: none;
+  font-size: 14px;
+  border: 1px solid grey;
+  border-radius: 3px;
 `;

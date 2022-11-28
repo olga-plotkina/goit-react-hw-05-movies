@@ -1,5 +1,5 @@
 import Notiflix from 'notiflix';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getMovieById } from 'api/getMovieById';
 import { Link, Outlet } from 'react-router-dom';
@@ -7,6 +7,7 @@ import {
   MovieInformation,
   MovieCard,
   AdditionalInfo,
+  BackButton,
 } from './MovieDetails.styled';
 
 export const MovieDetails = () => {
@@ -17,17 +18,17 @@ export const MovieDetails = () => {
   );
   const [userScore, setUserScore] = useState('0');
   const { movieId } = useParams();
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/products';
 
   useEffect(() => {
     async function getMovieInfo() {
       try {
         const movie = await getMovieById(movieId);
-        console.log(movie);
         setMovieInfo(movie);
         setMovieGenres(movie.genres.map(genre => genre.name).join(', '));
         setPoster(`https://image.tmdb.org/t/p/w500${movie.poster_path}`);
         setUserScore(`${(movie.vote_average * 10).toFixed(0)}%`);
-        console.log(movie);
       } catch (error) {
         Notiflix.Notify.failure(error);
       }
@@ -37,9 +38,7 @@ export const MovieDetails = () => {
 
   return (
     <main>
-      <button type="button" onClick={console.log(movieInfo)}>
-        Go back
-      </button>
+      <BackButton to={backLinkHref}>Go back</BackButton>
       <MovieInformation>
         <img src={poster} alt="King" />
         <MovieCard>
